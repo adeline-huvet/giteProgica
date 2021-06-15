@@ -5,6 +5,36 @@
 
 
 {% block body %}
-	<h1>Le gîte</h1>
-    <p>Le gîte se trouve à l'adresse : {{ gite.address }}</p>
+	<div class="card bg-dark text-white col-8">
+		<img src="https://via.placeholder.com/150" class="card-img" alt="...">
+		<div class="card-img-overlay">
+			<h5 class="card-title">
+				{{ gite.name }}
+			</h5>
+			<p class="card-text">
+				{{ gite.descript }}
+			</p>
+
+		</div>
+
+
+		<p>Le gîte se trouve à l'adresse :
+			{{ gite.address }}</p>
+		<p>Prix TTC par nuit en haute saison :
+			{{ gite.priceHightSeason }}
+			€
+		</p>
+		<p>Prix TTC par nuit en basse saison :
+			{{ gite.priceLowSeason }}
+			€
+		</p>
+		{% if gite.animals is same as(true) %}
+			<p>Animaux accepté</p>
+			<p>Supplément de
+				{{ gite.priceAnimals }}
+				€ par animal</p>
+		{% else %}
+			<p>Animaux refusé</p>
+		{% endif %}
+	</div>
 {% endblock %}
