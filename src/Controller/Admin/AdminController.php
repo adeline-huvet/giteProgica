@@ -34,7 +34,7 @@ class AdminController extends AbstractController
      */
 
     public function index() 
-    {
+    {   
         $gites = $this->repo->findAll();
         return $this->render('admin/index.html.twig',[
             'gites' => $gites,
