@@ -5,30 +5,45 @@
 {% endblock %}
 
 {% block body %}
-	administration des gîtes PROGICA
-
+	<h3>administration des gîtes PROGICA</h3>
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success">
+			{{ message }}
+		</div>
+	{% endfor %}
 	<div class="row">
-        <a href="{{ path("admin.new")}}" class="btn btn-warning col-1">Ajouter</a>
+		<a href="{{ path("admin.new")}}" class="btn btn-warning col-1">Ajouter</a>
 
-		<table class="table table-striped">
-			<thead>
-				<th>id</th>
-				<th>name</th>
-				<th>action</th>
-			</thead>
-			<tbody>
-				{% for gite in gites %}
-					<tr>
-						<td>#{{ gite.id }}</td>
-						<td>{{ gite.name }}</td>
-						<td>
-							<a href="" class="btn btn-primary">Editer</a>
-						</td>
+		<div class="container mt-4">
 
-					</tr>
 
-				</tbody>
-			{% endfor %}
-		</table>
+			<table class="table table-striped">
+				<thead>
+					<th>id</th>
+					<th>name</th>
+					<th>action</th>
+				</thead>
+				<tbody>
+					{% for gite in gites %}
+						<tr>
+							<td>#{{ gite.id }}</td>
+							<td>{{ gite.name }}</td>
+							<td>
+								<a href="{{path('admin.edit', {'id': gite.id }) }}" class="btn btn-primary">Editer</a>
+								<form method="post" action="{{ path('admin.delete', {'id': gite.id }) }}" style="display: inline-block" onsubmit="return confirm('Confirmez la suppréssion ?')">
+									<input type="hidden" name="_method" value="DELETE">
+									<input type="hidden" name="_token" value="{{csrf_token('delete' ~ gite.id) }}">
+									<button class="btn btn-danger">Supprimer</button>
+								</form>
+
+							</td>
+
+						</tr>
+
+					</tbody>
+				{% endfor %}
+			</table>
+
+		</div>
 	</div>
 {% endblock %}
