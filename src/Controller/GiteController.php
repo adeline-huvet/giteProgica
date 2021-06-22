@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\GiteSearch;
+use App\Form\GiteSearchType;
 use App\Repository\GiteRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -43,11 +46,19 @@ class GiteController extends AbstractController
     /**
      * @Route("/gites", name="gite.list")
      */
-    public function list(): Response
-    {
-        $gites = $this->repo->findAll();
+    public function list(Request $request): Response
+    {   //Créer une entité Recherche
+        //Créer le formulaire associés
+        //Gérer le traitement des données via SQL
+        $search = new GiteSearch();
+        $form = $this->createForm(GiteSearchType::class, $search );
+        $form->handleRequest($request);
+
+        $gites = $this->repo->findAllGiteSearch($search);
+
         return $this->render('gite/list.html.twig', [
             'gites' => $gites,
+            'form' => $form->createView(),
         ]);
     }
 }

@@ -6,6 +6,23 @@
 {% block body %}
 	<section class="row-title">
 		<h1>Liste des gîtes</h1>
+		<div class="row mt-3 mb-3">
+			<div class="col">
+				{{ form_start(form) }}
+				<div class="form-control">
+					<div class="col-md-4">
+						{{ form_row(form.minSurface) }}
+					</div>
+					<div class="col-md-4">
+						{{ form_row(form.maxBedrooms) }}
+					</div>
+					<div class="col-md-4">
+					{{form_row(form.submit)}}
+					</div>
+				</div>
+				{{ form_end(form) }}
+			</div>
+		</div>
 	</section>
 	<section class="row">
 		{% for gite in gites %}
@@ -14,9 +31,9 @@
 				<div class="card-body">
 					<h5 class="card-title">Card title</h5>
 					<p class="card-text">{{ gite.address }}</p>
-                    <p class="card-text">{{ gite.priceHightSeason }}</p>
-                    <p class="card-text">{{ gite.priceLowSeason }}</p>
-                    
+					<p class="card-text">{{ gite.priceHightSeason }}</p>
+					<p class="card-text">{{ gite.priceLowSeason }}</p>
+
 					<a href="{{ path('gite.show', {'id' : gite.id}) }}" class="btn btn-primary">Go somewhere</a>
 				</div>
 			</div>
