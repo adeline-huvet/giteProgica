@@ -57,7 +57,7 @@ class AdminController extends AbstractController
         {
             $this->em->persist($gite);
             $this->em->flush();
-            $this->addFlash('success', 'Bien modifier avec succès');
+            $this->addFlash('success', 'Bien modifié avec succès');
             return $this->redirectToRoute('admin.index');
         }
 
@@ -102,7 +102,7 @@ class AdminController extends AbstractController
         if($this->isCsrfTokenValid('delete' . $gite->getId(), $request->get('_token'))){
             $this->em->remove($gite);
             $this->em->flush();
-            $this->addFlash('success', 'Bien supprimer avec succès');
+            $this->addFlash('success', 'Bien supprimé avec succès');
         }
         return $this->redirectToRoute('admin.index');
     }

@@ -30,7 +30,7 @@
 							<td>{{ gite.name }}</td>
 							<td>
 								<a href="{{path('admin.edit', {'id': gite.id }) }}" class="btn btn-primary">Editer</a>
-								<form method="post" action="{{ path('admin.delete', {'id': gite.id }) }}" style="display: inline-block" onsubmit="return confirm('Confirmez la suppréssion ?')">
+								<form method="post" action="{{ path('admin.delete', {'id': gite.id }) }}" style="display: inline-block" onsubmit="return confirm('Confirmez la suppression ?')">
 									<input type="hidden" name="_method" value="DELETE">
 									<input type="hidden" name="_token" value="{{csrf_token('delete' ~ gite.id) }}">
 									<button class="btn btn-danger">Supprimer</button>

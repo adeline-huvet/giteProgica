@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Equipement;
 use App\Entity\Gite;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -46,6 +48,14 @@ class GiteType extends AbstractType
             ])
             ->add('descript', TextareaType::class , [
                 'required' => false 
+            ])
+
+            ->add('equipements', EntityType::class,[
+                    'class' => Equipement::class,
+                    'choice_label' => 'name',
+                    'multiple' => true,
+                    'expanded'=> true,
+                    'required' => false
             ])
         ;
     }
