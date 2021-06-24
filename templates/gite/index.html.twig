@@ -10,7 +10,11 @@
 	<section class="row">
 		{% for gite in gites %}
 			<div class="card" style="width: 18rem;">
-				<img src="..." class="card-img-top" alt="...">
+				{% if gite.imageName %}
+				<img src="{{ vich_uploader_asset(gite, 'imageFile') }}" class="card-img-top" alt="...">
+				{% else %}
+				<img src="images\gites/img/download.jpg" class="card-img-top" alt="">
+				{% endif %}
 				<div class="card-body">
 					<h5 class="card-title">Card title</h5>
 					<p class="card-text">{{ gite.address }}</p>
@@ -21,7 +25,7 @@
 					Chambres : {{ gite.bedroom }}
 					</h6>
                     </p>
-					<a href="{{ path('gite.show', {'id' : gite.id}) }}" class="btn btn-primary">Go somewhere</a>
+					<a href="{{ path('gite.show', {'id' : gite.id}) }}" class="btn btn-primary">Voir le gite</a>
 				</div>
 			</div>
 		{% endfor %}

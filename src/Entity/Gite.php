@@ -106,12 +106,16 @@ class Gite
  * @var string|null
  * Undocumented variable
  * @ORM\Column(type="string", length=255)
+ *@Assert\Image(mimeTypes ="image/jpeg, image/jpg, image/gif, image/png", mimeTypesMessage= "L'image doit être au format JPEG, JPG, GIF, Ou PNG") 
  */
     private $imageName;
+
+
 
     /**
      * @ORM\Column(type="datetime")
      * @var \DateTimeInterface|null
+     * 
      */
     private $updated_at; 
 
@@ -298,7 +302,7 @@ class Gite
     {
         $this->imageFile = $imageFile;
         if ($this->imageFile instanceof UploadedFile) {
-            $this->updatedAt = new \DateTime('now');
+            $this->updated_at = new \DateTime('now');
         }
 
         return $this;
