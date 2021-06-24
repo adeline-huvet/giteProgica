@@ -2,14 +2,51 @@
 
 namespace App\Entity;
 
+use App\Entity\Gite;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 class Contact 
 {
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(min = 3, max = 20)
+     */
     private string $firstName;
+
+
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(min = 3, max = 20)
+     */
     private string $lastName;
+
+
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(min = 3, max = 20)
+     */
     private string $email;
+
+
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(min = 10, max = 10)
+     */
     private string $phone;
+
+
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(min = 10, max = 500)
+     */
     private string $message;
+
+
+
+    private Gite $gite;
+
+
 
     /**
      * Get the value of firstName
@@ -107,6 +144,26 @@ class Contact
     public function setMessage($message)
     {
         $this->message = $message;
+
+        return $this;
+    }
+
+
+/**
+ * Get the value of gite
+ * @return self
+ */
+    public function getGite()
+    {
+        return $this->gite;
+    }
+
+    /**Set the value of gite
+     * 
+     */
+    public function setGite(Gite $gite)
+    {
+        $this->gite = $gite;
 
         return $this;
     }

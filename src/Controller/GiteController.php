@@ -2,13 +2,16 @@
 
 namespace App\Controller;
 
+use App\Entity\Contact;
+use App\Form\ContactType;
 use App\Entity\GiteSearch;
 use App\Form\GiteSearchType;
 use App\Repository\GiteRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Notification\ContactNotification;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class GiteController extends AbstractController
 {
@@ -35,10 +38,25 @@ class GiteController extends AbstractController
     /**
      * @Route("/gite/{id}", name="gite.show")
      */
-    public function show(int $id): Response
+    public function show(int $id, Request $request, ContactNotification $notification): Response
     {
         $gite = $this->repo->find($id);
-        return $this->render('gite/show.html.twig', ['gite' => $gite,]);   
+        $contact = new Contact();
+        $contact->setGite($gite);
+        $form = $this->createForm(ContactType::class, $contact);
+        $form->handleRequest($request);
+       
+        if($form->isSubmitted() && $form->isValid())
+        {   $notification->notify($contact);
+            $this->addFlash('success', 'Votre email à bien été envoyé');
+            return $this->redirectToRoute('gite.show', [
+                'id' => $gite->getId(),
+            ]);
+        }
+        return $this->render('gite/show.html.twig', [
+            'gite' => $gite,
+            'form' => $form ->createView()
+        ]);   
 
     }
 
