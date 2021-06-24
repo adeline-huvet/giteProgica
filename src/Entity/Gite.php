@@ -2,14 +2,19 @@
 
 namespace App\Entity;
 
-use App\Repository\GiteRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\GiteRepository;
+// use Vich\UploaderBundle\Entity\File;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @ORM\Entity(repositoryClass=GiteRepository::class)
+ * @Vich\Uploadable
  */
 class Gite
 {
@@ -87,6 +92,31 @@ class Gite
      */
     private $equipements;
 
+
+
+/**
+ * Undocumented variable
+ *@var File|null
+ * @Vich\UploadableField(mapping="gite_image", fileNameProperty="imageName", )
+ */
+    private $imageFile;
+
+
+/**
+ * @var string|null
+ * Undocumented variable
+ * @ORM\Column(type="string", length=255)
+ */
+    private $imageName;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @var \DateTimeInterface|null
+     */
+    private $updated_at; 
+
+
+
  
 
    
@@ -94,6 +124,7 @@ class Gite
     public function __construct()
     {
         $this->equipements = new ArrayCollection();
+        $this->updatedAt = new \DateTime();
     }
 
     public function getId(): ?int
@@ -249,4 +280,63 @@ class Gite
 
     
 
+
+    /**
+     * Get undocumented variable
+     */ 
+    public function getImageFile(): ?File
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * Set undocumented variable
+     *
+     * @return  self
+     */ 
+    public function setImageFile(?File $imageFile)
+    {
+        $this->imageFile = $imageFile;
+        if ($this->imageFile instanceof UploadedFile) {
+            $this->updatedAt = new \DateTime('now');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Get undocumented variable
+     *
+     * @return  string|null
+     */ 
+    public function getImageName(): ?string
+    {
+        return $this->imageName;
+    }
+
+    /**
+     * Set undocumented variable
+     *
+     * @param  string|null  $imageName  Undocumented variable
+     *
+     * @return  self
+     */ 
+    public function setImageName(?string $imageName):self
+    {
+        $this->imageName = $imageName;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updated_at;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    {
+        $this->updated_at = $updated_at;
+
+        return $this;
+    }
 }

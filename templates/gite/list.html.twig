@@ -32,7 +32,12 @@
 					<h5 class="card-title">Card title</h5>
 					<p class="card-text">{{ gite.address }}</p>
 					<p class="card-text">{{ gite.priceHightSeason }}</p>
-					<p class="card-text">{{ gite.priceLowSeason }}</p>
+					<p class="card-text">{{ gite.priceLowSeason }}
+					<h6 class="card-subtitle mb-2 text muted">
+					Surface : {{ gite.superficy }}
+					Chambres : {{ gite.bedroom }}
+					</h6>
+					</p>
 
 					<a href="{{ path('gite.show', {'id' : gite.id}) }}" class="btn btn-primary">Go somewhere</a>
 				</div>

@@ -14,6 +14,7 @@
 		<article class="col-4">
 			{{ form_start(formGite) }}
 			{# {{ form_rest(formGite) }} #}
+			
 			<article class="row">
 				<div class="col-md-6">
 					{{ form_row(formGite.name)}}
@@ -29,6 +30,10 @@
 					{{ form_row(formGite.descript)}}
 
 				</div>
+			<div class="col-md-6">
+			{{ form_row(formGite.imageFile ) }}
+			</div>
+		
 			</article>
 
 			<article class="row">

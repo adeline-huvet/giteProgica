@@ -55,7 +55,7 @@ class AdminController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid()) 
         {
-            $this->em->persist($gite);
+            
             $this->em->flush();
             $this->addFlash('success', 'Bien modifié avec succès');
             return $this->redirectToRoute('admin.index');

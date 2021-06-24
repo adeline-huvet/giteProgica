@@ -3,12 +3,15 @@
 
 namespace App\Entity;
 
+// use Symfony\Component\Validator\Constraints as Assert;
+
 
 class GiteSearch
 {
 
     private  $minSurface;
     private  $maxBedrooms;
+    private $equipements;
     
 
 
@@ -49,6 +52,26 @@ class GiteSearch
     public function setMaxBedrooms(int $maxBedrooms)
     {
         $this->maxBedrooms = $maxBedrooms;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of equipements
+     */ 
+    public function getEquipements()
+    {
+        return $this->equipements;
+    }
+
+    /**
+     * Set the value of equipements
+     *
+     * @return  self
+     */ 
+    public function setEquipements($equipements)
+    {
+        $this->equipements = $equipements;
 
         return $this;
     }
