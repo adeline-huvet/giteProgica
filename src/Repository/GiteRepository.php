@@ -49,7 +49,7 @@ class GiteRepository extends ServiceEntityRepository
 
             if($search->getMaxBedrooms()){
                 $query= $query
-                        ->andWhere('g.bedroom > :maxBedrooms')
+                        ->andWhere('g.bedroom < :maxBedrooms')
                         ->setParameter('maxBedrooms', $search->getMaxBedrooms());
 
             }

@@ -15,7 +15,7 @@ class GiteSearch
     
 
 
-
+ 
     /**
      * Get the value of minSurface
      */ 
