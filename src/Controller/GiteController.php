@@ -17,7 +17,7 @@ class GiteController extends AbstractController
 {
     public function __construct(GiteRepository $giteRepository)
     {
-        $this->repo =$giteRepository;
+        $this->giteRepository =$giteRepository;
     }
 
     /**
@@ -27,7 +27,7 @@ class GiteController extends AbstractController
      */
     public function index()
     {
-        $gites = $this->repo->findLastGite();
+        $gites = $this->giteRepository->findLastGite();
       
         return $this->render('gite/index.html.twig',[
             'gites' => $gites
@@ -40,7 +40,7 @@ class GiteController extends AbstractController
      */
     public function show(int $id, Request $request, ContactNotification $notification): Response
     {
-        $gite = $this->repo->find($id);
+        $gite = $this->giteRepository->find($id);
         $contact = new Contact();
         $contact->setGite($gite);
         $form = $this->createForm(ContactType::class, $contact);
@@ -72,7 +72,7 @@ class GiteController extends AbstractController
         $form = $this->createForm(GiteSearchType::class, $search );
         $form->handleRequest($request);
 
-        $gites = $this->repo->findAllGiteSearch($search);
+        $gites = $this->giteRepository->findAllGiteSearch($search);
 
         return $this->render('gite/list.html.twig', [
             'gites' => $gites,

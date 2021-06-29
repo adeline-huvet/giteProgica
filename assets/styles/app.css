@@ -1,8 +1,31 @@
- /*body {
+ body {
      
     background-color: lightgray;
-}*/
+}
 
 #contactForm {
     display:none;
+    margin:5% auto;
+    margin-top: 1%;
+}
+
+#contact{
+    margin:5% auto;
+}
+
+
+#cardShow{
+    margin: 5% auto;
+}
+
+
+#cardGites{
+    
+    margin: 5% auto;
+    width: 500px;
+}
+
+#cardGitesIndex{
+    margin: 5% auto;
+    width: 500px;
 }

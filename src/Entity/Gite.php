@@ -117,7 +117,7 @@ class Gite
      * @var \DateTimeInterface|null
      * 
      */
-    private $updated_at; 
+    private $updatedAt; 
 
 
 
@@ -302,7 +302,7 @@ class Gite
     {
         $this->imageFile = $imageFile;
         if ($this->imageFile instanceof UploadedFile) {
-            $this->updated_at = new \DateTime('now');
+            $this->updatedAt = new \DateTime('now');
         }
 
         return $this;
@@ -334,12 +334,12 @@ class Gite
 
     public function getUpdatedAt(): ?\DateTimeInterface
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 
-    public function setUpdatedAt(\DateTimeInterface $updated_at): self
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
-        $this->updated_at = $updated_at;
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }
