@@ -11,7 +11,7 @@
 		{% for gite in gites %}
 			<div class="card" id="cardGites">
 				{% if gite.imageName %}
-				<img src="{{ vich_uploader_asset(gite, 'imageFile') }}" class="card-img-top" alt="...">
+				<img src="{{ vich_uploader_asset(gite, 'imageFile') | imagine_filter('miniature')}}" class="card-img-top" alt="...">
 				{% else %}
 				<img src="images\gites/img/download.jpg" class="card-img-top" alt="">
 				{% endif %}
