@@ -6,6 +6,7 @@ use App\Entity\Gite;
 use App\Form\GiteType;
 use App\Repository\GiteRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -32,9 +33,15 @@ class AdminController extends AbstractController
      *@route("/admin",name="admin.index")
      * @return Response
      */
-    public function index()
+    public function index(Request $request, PaginatorInterface $paginator): Response
     {
-        $gites = $this->giteRepository->findAll();
+        $data = $this->giteRepository->findAll();
+
+        $gites= $paginator->paginate(
+            $data,
+            $request->query->getInt('page', 1),
+            10
+        );
         return $this->render('admin/index.html.twig',[
             'gites'=> $gites,
         ]);

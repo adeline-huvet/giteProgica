@@ -8,6 +8,8 @@ use App\Entity\GiteSearch;
 use App\Form\GiteSearchType;
 use App\Repository\GiteRepository;
 use App\Notification\ContactNotification;
+use Knp\Component\Pager\PaginatorInterface;
+//use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -64,7 +66,7 @@ class GiteController extends AbstractController
     /**
      * @Route("/gites", name="gite.list")
      */
-    public function list(Request $request): Response
+    public function list(Request $request, PaginatorInterface $paginator): Response
     {   //Créer une entité Recherche
         //Créer le formulaire associés
         //Gérer le traitement des données via SQL
@@ -72,11 +74,19 @@ class GiteController extends AbstractController
         $form = $this->createForm(GiteSearchType::class, $search );
         $form->handleRequest($request);
 
-        $gites = $this->giteRepository->findAllGiteSearch($search);
+        $data = $this->giteRepository->findAllGiteSearch($search);
+
+        $gites = $paginator->paginate(
+            $data,
+            $request->query->getInt('page', 1),
+            12
+        );
 
         return $this->render('gite/list.html.twig', [
             'gites' => $gites,
             'form' => $form->createView(),
         ]);
     }
+
+
 }

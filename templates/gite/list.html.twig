@@ -14,10 +14,10 @@
 						{{ form_row(form.minSurface) }}
 					</div>
 					<div class="col-md-4">
-						{{ form_row(form.maxBedrooms) }} 
+						{{ form_row(form.maxBedrooms) }}
 					</div>
 					<div class="col-md-4">
-					{{form_row(form.submit)}}
+						{{form_row(form.submit)}}
 					</div>
 				</div>
 				{{ form_end(form) }}
@@ -27,25 +27,31 @@
 	<section class="row">
 		{% for gite in gites %}
 			<div class="card" id="cardGitesIndex">
-			{% if gite.imageName %}
-				<img src="{{ vich_uploader_asset(gite, 'imageFile') | imagine_filter('miniature') }}" class="card-img-top" alt="...">
+				{% if gite.imageName %}
+					<img src="{{ vich_uploader_asset(gite, 'imageFile') | imagine_filter('miniature') }}" class="card-img-top" alt="...">
 				{% else %}
-				<img src="{{ asset('images/gites/img/download.jpg') | imagine_filter('miniature') }}" class="card-img-top" alt="">
+					<img src="{{ asset('images/gites/img/download.jpg') | imagine_filter('miniature') }}" class="card-img-top" alt="">
 				{% endif %}
 				<div class="card-body">
 					<h5 class="card-title">{{ gite.name }}</h5>
 					<p class="card-text">{{ gite.address }}</p>
 					<p class="card-text">{{ gite.priceHightSeason }}</p>
 					<p class="card-text">{{ gite.priceLowSeason }}
-					<h6 class="card-subtitle mb-2 text muted">
-					Surface : {{ gite.superficy }}
-					Chambres : {{ gite.bedroom }}
-					</h6>
+						<h6 class="card-subtitle mb-2 text muted">
+							Surface :
+							{{ gite.superficy }}
+							Chambres :
+							{{ gite.bedroom }}
+						</h6>
 					</p>
 
 					<a href="{{ path('gite.show', {'id' : gite.id}) }}" class="btn btn-primary">Voir le gite</a>
 				</div>
 			</div>
 		{% endfor %}
+		<div class="d-flex justify-content-center">
+			{% do gites.setPageRange(2) %}
+			{{ knp_pagination_render(gites, 'pagination.html.twig') }}
+		</div>
 	</section>
 {% endblock %}
