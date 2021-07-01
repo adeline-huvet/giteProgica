@@ -28,9 +28,9 @@
 		{% for gite in gites %}
 			<div class="card" id="cardGitesIndex">
 				{% if gite.imageName %}
-					<img src="{{ vich_uploader_asset(gite, 'imageFile') | imagine_filter('miniature') }}" class="card-img-top" alt="...">
+					<img src="{{ vich_uploader_asset(gite, 'imageFile')  }}" style="width: 300px; height:250px;" class="card-img-top" alt="...">
 				{% else %}
-					<img src="{{ asset('images/gites/img/download.jpg') | imagine_filter('miniature') }}" class="card-img-top" alt="">
+					<img src="{{ asset('images/gites/img/download.jpg') }}" style="width: 300px; height:250px;" class="card-img-top" alt="">
 				{% endif %}
 				<div class="card-body">
 					<h5 class="card-title">{{ gite.name }}</h5>
