@@ -7,7 +7,11 @@
 {% block body %}
 
 	<div class="card bg-dark text-white col-4 mt-4" id="cardShow">
-		<img src="https://via.placeholder.com/15" class="card-img" alt="...">
+			{% if gite.imageName %}
+				<img src="{{ vich_uploader_asset(gite, 'imageFile')}}" class="card-img-top" alt="...">
+				{% else %}
+				<img src="{{ asset('images/gites/img/download.jpg')}}" class="card-img-top" alt="">
+				{% endif %}
 		<div class="card-img-overlay">
 			<h5 class="card-title">
 				{{ gite.name }}
@@ -69,3 +73,4 @@
 
 			<div></article>
 		{% endblock %}
+ 

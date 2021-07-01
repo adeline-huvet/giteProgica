@@ -22,6 +22,9 @@ class GiteType extends AbstractType
             ->add('address', TextType::class , [
                 'required' => false 
             ])
+            ->add('lat')
+            ->add('lng')
+            
             ->add('superficy', NumberType::class , [
                 'required' => false 
             ])

@@ -14,7 +14,7 @@
 						{{ form_row(form.minSurface) }}
 					</div>
 					<div class="col-md-4">
-						{{ form_row(form.maxBedrooms) }}
+						{{ form_row(form.maxBedrooms) }} 
 					</div>
 					<div class="col-md-4">
 					{{form_row(form.submit)}}
@@ -30,7 +30,7 @@
 			{% if gite.imageName %}
 				<img src="{{ vich_uploader_asset(gite, 'imageFile') | imagine_filter('miniature') }}" class="card-img-top" alt="...">
 				{% else %}
-				<img src="images\gites/img/download.jpg" class="card-img-top" alt="">
+				<img src="{{ asset('images/gites/img/download.jpg') | imagine_filter('miniature') }}" class="card-img-top" alt="">
 				{% endif %}
 				<div class="card-body">
 					<h5 class="card-title">{{ gite.name }}</h5>

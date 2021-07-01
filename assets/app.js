@@ -11,6 +11,24 @@ import './styles/app.css';
 // start the Stimulus application
 import './bootstrap';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import Places from 'places.js';
+
+
+
+
+let inputAdress = document.querySelector('#gite_address');
+if(inputAdress !== null){
+    let place = Places({
+        container: inputAdress
+
+})
+    place.on('change', function(e){
+       document.querySelector('#gite_lat').value = e.suggestion.latlng.lat
+       document.querySelector('#gite_lng').value = e.suggestion.latlng.lng
+    })
+}
+
+
 
 
 let btnContact = document.getElementById('contact');
